@@ -8,7 +8,7 @@ from shapely.geometry import shape, LineString
 from shapely.ops import polygonize
 import tifffile
 
-class SatelliteImageProcessor:
+class SurfaceMaskProcessing:
     """
     A class for processing satellite images with associated geo-data.
     """
