@@ -131,10 +131,11 @@ class SurfaceMaskProcessing:
 
         return self.masking_raster(mainland_polygon)  # Masking the image
 
-    def image_write(self, masked_image, export_path)
+    def image_write(self, masked_image, export_path):
         """
         Writes the satellite image to disc.
         :param masked_image: Masked tiff to export.
         :param export_path: Path to export the processed image.
         """
-        tifffile.imwrite(export_path, masked_image)
+        with rasterio.open(export_path, 'w', **self.image_profile) as dst:
+          dst.write(masked_image)
