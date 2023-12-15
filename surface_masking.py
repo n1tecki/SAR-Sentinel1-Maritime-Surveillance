@@ -107,9 +107,9 @@ class SurfaceMaskProcessing:
         )
         polygon_masks = np.logical_not(polygon_masks)
 
-        if len(self.image_data.shape) == 3:
-            polygon_masks = np.stack([polygon_masks] * 3, axis=-1)
-        return self.image_data * polygon_masks.transpose(2, 0, 1)
+        masked_image_data = np.where(polygon_masks, 0, self.image_data)
+
+        return masked_image_data, self.image_profile.copy()
 
     def process_image(self):
         """
@@ -129,7 +129,9 @@ class SurfaceMaskProcessing:
         mainland_polygon = gpd.GeoSeries(polygonize(expanded_coast_line.geometry))  # Making polygon from coastline
         mainland_polygon.set_crs(expanded_coast_line.crs, inplace=True)  # Setting the Coordinate Reference System
 
-        return self.masking_raster(mainland_polygon)  # Masking the image
+        masked_image, image_profile = self.masking_raster(mainland_polygon) # Masking the image
+
+        return masked_image, image_profile
 
     def image_write(self, masked_image, export_path):
         """
