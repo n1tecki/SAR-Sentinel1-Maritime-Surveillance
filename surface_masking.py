@@ -131,5 +131,5 @@ class SurfaceMaskProcessing:
         mainland_polygon = gpd.GeoSeries(polygonize(expanded_coast_line.geometry))  # Making polygon from coastline
         mainland_polygon.set_crs(expanded_coast_line.crs, inplace=True)  # Setting the Coordinate Reference System
 
-        masked_image = self.masking_raster(mainland_polygon)  # Masking the image
-        tifffile.imwrite(self.export_path, masked_image)
+        return self.masking_raster(mainland_polygon)  # Masking the image
+        #tifffile.imwrite(self.export_path, masked_image)
