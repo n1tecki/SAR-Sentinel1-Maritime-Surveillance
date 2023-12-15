@@ -13,17 +13,15 @@ class SurfaceMaskProcessing:
     A class for processing satellite images with associated geo-data.
     """
 
-    def __init__(self, image_path: str, geojson_path: str, export_path: str, 
-                 land_mask: bool = True, maritime_surface: bool = False):
+    def __init__(self, image_path: str, geojson_path: str, land_mask: bool = True, 
+                 maritime_surface: bool = False):
         """
         Initializes the SatelliteImageProcessor with file paths.
         :param image_path: Path to the satellite image file.
         :param geojson_path: Path to the GeoJSON file.
-        :param export_path: Path to export the processed image.
         """
         self.image_path = image_path
         self.geojson_path = geojson_path
-        self.export_path = export_path
         self.src = None
         self.image_data = None
         self.image_profile = None
@@ -132,4 +130,11 @@ class SurfaceMaskProcessing:
         mainland_polygon.set_crs(expanded_coast_line.crs, inplace=True)  # Setting the Coordinate Reference System
 
         return self.masking_raster(mainland_polygon)  # Masking the image
-        #tifffile.imwrite(self.export_path, masked_image)
+
+    def image_write(self, masked_image, export_path)
+        """
+        Writes the satellite image to disc.
+        :param masked_image: Masked tiff to export.
+        :param export_path: Path to export the processed image.
+        """
+        tifffile.imwrite(export_path, masked_image)
