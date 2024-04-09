@@ -124,7 +124,7 @@ class COCOImageProcessor:
                 self.image_id += 1
                 self.annotation_id += 1
 
-        # Save separate COCO files for each split
+        # Save separate COCO file for each split
         annotations_dir = os.path.join(self.export_directory, 'annotations')
         os.makedirs(annotations_dir, exist_ok=True)
         for split in ["train", "val", "test"]:

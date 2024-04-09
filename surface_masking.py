@@ -10,7 +10,7 @@ import tifffile
 
 class SurfaceMaskProcessing:
     """
-    A class for processing satellite images with associated geo-data.
+    A class for processing satellite images with associated geo-data
     """
 
     def __init__(self, image_path: str, geojson_path: str, land_mask: bool = True, 

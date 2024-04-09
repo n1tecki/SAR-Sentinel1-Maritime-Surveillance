@@ -90,7 +90,7 @@ class COCOImageProcessor:
     def process_images(self) -> None:
         """
         Processes all images in the source directory, splitting them into training, validation, and test sets.
-        It creates COCO-style annotations and saves them into JSON files.
+        It creates COCO-style annotations and save them into JSON files.
         """
         files = [f for f in os.listdir(self.source_directory) if f.lower().endswith('.tif')]
         train_files, val_test_files = train_test_split(files, test_size=0.3, random_state=42)
